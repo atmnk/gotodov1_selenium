@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TodoList extends TodoUIObject{
+    private static final By DeleteIconLocator = By.xpath("//*[name()='svg']");
     @FindBy(id = "todos")
     WebElement list;
     public void waitForListToBeVisible(){
@@ -37,10 +38,10 @@ public class TodoList extends TodoUIObject{
     }
 
     public TodoList DeleteTodoByTitle(String todoTitle) {
+        WebElement todoItem = driver.findElement(getTodoLocatorByTitle(todoTitle));
         Actions actions = new Actions(driver);
-        By todoLocatorByTitle = getTodoLocatorByTitle(todoTitle);
-        actions.moveToElement(driver.findElement(todoLocatorByTitle)).perform();
-        driver.findElement(todoLocatorByTitle).findElement(By.xpath("//*[name()='svg']")).click();
+        actions.moveToElement(todoItem).perform();
+        todoItem.findElement(DeleteIconLocator).click();
         return this;
     }
 }
