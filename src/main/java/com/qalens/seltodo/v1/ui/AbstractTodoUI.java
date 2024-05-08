@@ -1,4 +1,4 @@
-package com.qalens.seltodo.v1.ui.objects;
+package com.qalens.seltodo.v1.ui;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,10 +13,11 @@ import java.time.Duration;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public abstract class TodoUIObject {
+public abstract class AbstractTodoUI {
 
+    public static final String APP_URL = "https://gotodov1.onrender.com";
     protected WebDriver driver;
-    public TodoUIObject(WebDriver driver) {
+    public AbstractTodoUI(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new AjaxElementLocatorFactory(this.driver,10),this);
     }
@@ -31,7 +32,7 @@ public abstract class TodoUIObject {
     public static <T> T launch(Function<WebDriver,T> factory, Consumer<T> waitFunction){
         WebDriver driver=new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get("https://gotodov1.onrender.com");
+        driver.get(APP_URL);
         return getObject(driver,factory,waitFunction);
     }
     public void waitForVisible(WebElement element, Duration duration){

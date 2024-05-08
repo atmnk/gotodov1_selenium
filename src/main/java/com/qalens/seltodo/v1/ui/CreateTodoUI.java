@@ -1,4 +1,4 @@
-package com.qalens.seltodo.v1.ui.objects;
+package com.qalens.seltodo.v1.ui;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -6,20 +6,20 @@ import org.openqa.selenium.support.FindBy;
 
 import java.time.Duration;
 
-public class CreateTodoForm extends TodoUIObject{
+public class CreateTodoUI extends AbstractTodoUI {
     @FindBy(css = "[name='title']")
     WebElement titleTextBox;
     @FindBy(tagName = "button")
     WebElement addButton;
-    public void waitForForm(){
+    public void waitForCreateTodoFormToBeRendered(){
         waitForVisible(titleTextBox, Duration.ofSeconds(60));
         waitForVisible(addButton, Duration.ofSeconds(60));
     }
-    public CreateTodoForm(WebDriver driver) {
+    public CreateTodoUI(WebDriver driver) {
         super(driver);
     }
 
-    public CreateTodoForm tryCreateTodo(String title) {
+    public CreateTodoUI tryCreatingTodoWithTitle(String title) {
         titleTextBox.clear();
         titleTextBox.sendKeys(title);
         addButton.click();
