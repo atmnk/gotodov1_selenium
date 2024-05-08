@@ -38,8 +38,9 @@ public class TodoList extends TodoUIObject{
 
     public TodoList DeleteTodoByTitle(String todoTitle) {
         Actions actions = new Actions(driver);
-        actions.moveToElement(driver.findElement(getTodoLocatorByTitle(todoTitle))).perform();
-        driver.findElement(getTodoLocatorByTitle(todoTitle)).findElement(By.xpath("//*[name()='svg']")).click();
+        By todoLocatorByTitle = getTodoLocatorByTitle(todoTitle);
+        actions.moveToElement(driver.findElement(todoLocatorByTitle)).perform();
+        driver.findElement(todoLocatorByTitle).findElement(By.xpath("//*[name()='svg']")).click();
         return this;
     }
 }
