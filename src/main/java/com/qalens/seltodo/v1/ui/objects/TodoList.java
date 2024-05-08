@@ -20,26 +20,26 @@ public class TodoList extends TodoUIObject{
         super(driver);
     }
     public TodoList waitForTodo(String title){
-        waitForVisible(getBy(title),Duration.ofSeconds(10));
+        waitForVisible(getTodoLocatorByTitle(title),Duration.ofSeconds(10));
         return this;
     }
     public TodoList waitForNoTodo(String title){
-        waitForInVisible(getBy(title),Duration.ofSeconds(10));
+        waitForInVisible(getTodoLocatorByTitle(title),Duration.ofSeconds(10));
         return this;
     }
 
     public List<String> getListItemsByTitle(String title) {
-        return list.findElements(getBy(title)).stream().map(WebElement::getText).collect(Collectors.toList());
+        return list.findElements(getTodoLocatorByTitle(title)).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
-    private static By getBy(String title) {
+    private static By getTodoLocatorByTitle(String title) {
         return By.xpath("//li[.='" + title + "']/form");
     }
 
     public TodoList DeleteTodoByTitle(String todoTitle) {
         Actions actions = new Actions(driver);
-        actions.moveToElement(driver.findElement(getBy(todoTitle))).perform();
-        driver.findElement(getBy(todoTitle)).findElement(By.xpath("//*[name()='svg']")).click();
+        actions.moveToElement(driver.findElement(getTodoLocatorByTitle(todoTitle))).perform();
+        driver.findElement(getTodoLocatorByTitle(todoTitle)).findElement(By.xpath("//*[name()='svg']")).click();
         return this;
     }
 }
