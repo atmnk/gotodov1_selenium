@@ -14,7 +14,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public abstract class AbstractTodoUI {
-
     public static final String APP_URL = "https://gotodov1.onrender.com";
     protected WebDriver driver;
     public AbstractTodoUI(WebDriver driver) {
@@ -35,15 +34,15 @@ public abstract class AbstractTodoUI {
         driver.get(APP_URL);
         return getObject(driver,factory,waitFunction);
     }
-    public void waitForVisible(WebElement element, Duration duration){
+    protected void waitForVisible(WebElement element, Duration duration){
         WebDriverWait wait=new WebDriverWait(this.driver,duration);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
-    public void waitForVisible(By locator, Duration duration){
+    protected void waitForVisible(By locator, Duration duration){
         WebDriverWait wait=new WebDriverWait(this.driver,duration);
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
-    public void waitForInVisible(By locator, Duration duration){
+    protected void waitForInVisible(By locator, Duration duration){
         WebDriverWait wait=new WebDriverWait(this.driver,duration);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
